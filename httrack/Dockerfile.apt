@@ -1,0 +1,10 @@
+FROM ubuntu:trusty
+LABEL maintainer "container-image https://github.com/container-image"
+
+RUN set -eux \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends --no-install-suggests \
+		 httrack \
+	&& rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["httrack", "--update"]

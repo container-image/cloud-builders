@@ -1,0 +1,21 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/cloud-builders/httrack:latest
+      - .
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/cloud-builders/httrack:apt
+      - -f
+      - Dockerfile.apt
+      - .
+
+images:
+  - gcr.io/$PROJECT_ID/cloud-builders/httrack:latest
+  - gcr.io/$PROJECT_ID/cloud-builders/httrack:apt
+
+timeout: 600s
