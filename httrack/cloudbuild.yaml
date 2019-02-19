@@ -1,21 +1,21 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: gcr.io/cloud-builders/docker:18.09.0
     args:
+      - image
       - build
+      - --pull
       - -t
-      - gcr.io/$PROJECT_ID/cloud-builders/httrack:latest
+      - gcr.io/$PROJECT_ID/cloud-builders/httrack:$_TAG
       - .
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: gcr.io/cloud-builders/docker:18.09.0
     args:
-      - build
-      - -t
-      - gcr.io/$PROJECT_ID/cloud-builders/httrack:apt
-      - -f
-      - Dockerfile.apt
-      - .
+    - image
+    - tag
+    - gcr.io/$PROJECT_ID/cloud-builders/httrack:$_TAG
+    - gcr.io/$PROJECT_ID/cloud-builders/httrack:latest
 
 images:
+  - gcr.io/$PROJECT_ID/cloud-builders/httrack:$_TAG
   - gcr.io/$PROJECT_ID/cloud-builders/httrack:latest
-  - gcr.io/$PROJECT_ID/cloud-builders/httrack:apt
 
 timeout: 600s
