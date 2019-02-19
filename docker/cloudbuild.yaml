@@ -1,12 +1,15 @@
 steps:
   - name: gcr.io/cloud-builders/docker:18.09.0
     args:
+      - image
       - build
+      - --pull
       - -t
       - gcr.io/$PROJECT_ID/cloud-builders/docker:18.09.2
       - .
   - name: gcr.io/cloud-builders/docker:18.09.0
     args:
+      - image
       - tag
       - gcr.io/$PROJECT_ID/cloud-builders/docker:18.09.2
       - gcr.io/$PROJECT_ID/cloud-builders/docker:latest
@@ -14,3 +17,5 @@ steps:
 images:
   - gcr.io/$PROJECT_ID/cloud-builders/docker:18.09.2
   - gcr.io/$PROJECT_ID/cloud-builders/docker:latest
+
+timeout: 600s
