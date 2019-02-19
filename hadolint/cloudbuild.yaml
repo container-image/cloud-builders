@@ -1,0 +1,23 @@
+steps:
+  - name: gcr.io/cloud-builders/docker:18.09.0
+    args:
+      - image
+      - build
+      - --pull
+      - --build-arg
+      - HADOLINT_VERSION=$_TAG
+      - -t
+      - gcr.io/$PROJECT_ID/cloud-builders/hadolint:$_TAG
+      - .
+  - name: gcr.io/cloud-builders/docker:18.09.0
+    args:
+      - image
+      - tag
+      - gcr.io/$PROJECT_ID/cloud-builders/hadolint:$_TAG
+      - gcr.io/$PROJECT_ID/cloud-builders/hadolint:latest
+
+images:
+  - gcr.io/$PROJECT_ID/cloud-builders/hadolint:$_TAG
+  - gcr.io/$PROJECT_ID/cloud-builders/hadolint:latest
+
+timeout: 600s
