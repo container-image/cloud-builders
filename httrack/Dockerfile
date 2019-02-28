@@ -1,4 +1,4 @@
-FROM buildpack-deps:xenial
+FROM buildpack-deps:disco
 LABEL maintainer "container-image https://github.com/container-image"
 
 RUN set -eux && \
